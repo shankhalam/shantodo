@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 left my-5 text-center">
+            <h5 text-center>Add Tasks</h5>
+            <div class="container form-container p-3">
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-success rounded">Add Task</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 right my-5 text-center">
+            <h5 text-center>View Tasks</h5>
+            <table class="table table-striped tasktable">
+                <thead>
+                  <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for t in todo %}
+                  <tr>
+                    <td>{{t.task}}</td>
+                    <td>{{t.priority}}</td>
+                    <td>{{t.date}}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="{% url 'updateitem' t.id%}" type="button" class="btn btn-warning">Update</a>
+                            <a href="{% url 'finishitem' t.id %}" type="button" class="btn btn-info">Finish</a>
+                        </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
