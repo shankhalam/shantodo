@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Add_task
 from .forms import AddtaskForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required()
 def tasks(request):
     todo = Add_task.objects.all()
     form = AddtaskForm()

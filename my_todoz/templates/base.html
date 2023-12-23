@@ -10,11 +10,17 @@
 </head>
 <body>
     <!-- navbar -->
-    <nav class="navbar bg-success text-center">
-        <div class="container-fluid text-center bg-success ">
-          <h5 class="text-white text-center">ToDo Application</h5>
+    <nav class="navbar bg-success">
+      <div class="container-fluid">
+        <a class="navbar-brand text-light">My ToDoZ</a>
+        {% if user.is_authenticated %}
+        <div class="d-flex">
+          <p class="mx-2 text-center text-light">Welcome {{user.username}}</p>
+          <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
         </div>
-      </nav>
+        {% endif %}
+      </div>
+    </nav>
 
       {% block body %}
       
